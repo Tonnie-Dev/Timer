@@ -3,6 +3,7 @@ package com.uxstate.timer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -55,6 +56,12 @@ fun Timer(
     }, contentAlignment = Alignment.Center){
 
 
+        
+        Canvas(modifier = modifier, onDraw = {
+
+            //draw an arc which is a part of a circle
+            
+        })
     }
 
 
