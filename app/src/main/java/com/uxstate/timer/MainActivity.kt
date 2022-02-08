@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -17,6 +18,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.uxstate.timer.ui.theme.TimerTheme
+import java.lang.Math.PI
+import java.lang.Math.sin
+import java.lang.Math.cos
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +93,17 @@ fun Timer(
                 ),
                 startAngle = -215f, sweepAngle = 250f * value
             )
+
+            //center of the circle
+val center = Offset(size.width.toFloat()/2, size.height.toFloat()/2)
+            val beta = (250f * value +145f) * (180/ PI)
+
+            val radius = size.width.toFloat() /2
+
+
+            val a = cos(beta) * radius
+            val b = sin(beta) * radius
+
         })
     }
 
