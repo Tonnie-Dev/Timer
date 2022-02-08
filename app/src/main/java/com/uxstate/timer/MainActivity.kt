@@ -3,9 +3,12 @@ package com.uxstate.timer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -41,5 +44,20 @@ fun Timer(
     var value by remember{ mutableStateOf(initialValue)}
     var currentTime by remember{ mutableStateOf(totalTime)}
     var isTimerRunning by remember{ mutableStateOf(false)}
+    
+    
+    //Box to put everything
+    Box(modifier = modifier.onSizeChanged {
+            //whenever the size changes we get a new size in form of IntSize
+            newIntSize ->
+
+        size = newIntSize
+    }, contentAlignment = Alignment.Center){
+
+
+    }
+
+
+
 }
 
