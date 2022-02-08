@@ -45,6 +45,8 @@ fun Timer(
     //STATES
     //Constructs an IntSize from width and height Int values
     var size by remember { mutableStateOf(IntSize.Zero) }
+
+    //current percentage of our time in relation to the total time
     var value by remember { mutableStateOf(initialValue) }
     var currentTime by remember { mutableStateOf(totalTime) }
     var isTimerRunning by remember { mutableStateOf(false) }
@@ -61,6 +63,7 @@ fun Timer(
 
         Canvas(modifier = modifier, onDraw = {
 
+            //1st Arc
             //draw an arc which is a part of a circle
             drawArc(
                 color = inactiveBarColor,
@@ -71,6 +74,19 @@ fun Timer(
                 useCenter = false,
                 size = Size(size.width.toFloat(), size.height.toFloat()),
                 style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+            )
+
+            //2nd Arc
+
+            drawArc(
+                color = activeBarColor,
+                size = Size(size.width.toFloat(), size.height.toFloat()),
+                useCenter = false,
+                style = Stroke(
+                    width = strokeWidth.toPx(),
+                    cap = StrokeCap.Round
+                ),
+                startAngle = -215f, sweepAngle = 250f * value
             )
         })
     }
