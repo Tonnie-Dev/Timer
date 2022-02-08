@@ -8,7 +8,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
@@ -41,29 +44,36 @@ fun Timer(
 
     //STATES
     //Constructs an IntSize from width and height Int values
-    var size by remember{ mutableStateOf(IntSize.Zero)}
-    var value by remember{ mutableStateOf(initialValue)}
-    var currentTime by remember{ mutableStateOf(totalTime)}
-    var isTimerRunning by remember{ mutableStateOf(false)}
-    
-    
+    var size by remember { mutableStateOf(IntSize.Zero) }
+    var value by remember { mutableStateOf(initialValue) }
+    var currentTime by remember { mutableStateOf(totalTime) }
+    var isTimerRunning by remember { mutableStateOf(false) }
+
+
     //Box to put everything
     Box(modifier = modifier.onSizeChanged {
-            //whenever the size changes we get a new size in form of IntSize
+        //whenever the size changes we get a new size in form of IntSize
             newIntSize ->
 
         size = newIntSize
-    }, contentAlignment = Alignment.Center){
+    }, contentAlignment = Alignment.Center) {
 
 
-        
         Canvas(modifier = modifier, onDraw = {
 
             //draw an arc which is a part of a circle
-            
+            drawArc(
+                color = inactiveBarColor,
+                startAngle = -215f,
+                sweepAngle = 250f,
+
+                //stops connecting to the center which forms a pie
+                useCenter = false,
+                size = Size(size.width.toFloat(), size.height.toFloat()),
+                style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+            )
         })
     }
-
 
 
 }
