@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
@@ -19,8 +20,8 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.uxstate.timer.ui.theme.TimerTheme
 import java.lang.Math.PI
-import java.lang.Math.sin
-import java.lang.Math.cos
+import kotlin.math.cos
+import kotlin.math.sin
 
 
 class MainActivity : ComponentActivity() {
@@ -95,14 +96,24 @@ fun Timer(
             )
 
             //center of the circle
-val center = Offset(size.width.toFloat()/2, size.height.toFloat()/2)
-            val beta = (250f * value +145f) * (180/ PI)
+            val center = Offset(size.width.toFloat() / 2, size.height.toFloat() / 2)
+            val beta = (250f * value + 145f) * (180 / PI).toFloat()
 
-            val radius = size.width.toFloat() /2
+            val radius = size.width / 2f
 
-
+            // calculate unit circle side a & b
             val a = cos(beta) * radius
             val b = sin(beta) * radius
+
+            //Draw Handle on the canvas
+//Draws a sequence of points according to the given PointMode.
+            drawPoints(
+                points = listOf(Offset(center.x + a, center.y + b)),
+                pointMode = PointMode.Polygon,
+                color = handleColor,
+                strokeWidth = (strokeWidth * 3f).toPx(),
+                cap = StrokeCap.Round
+            )
 
         })
     }
