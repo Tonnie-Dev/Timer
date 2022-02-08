@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.uxstate.timer.ui.theme.TimerTheme
+import kotlinx.coroutines.delay
 import java.lang.Math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -63,6 +64,26 @@ fun Timer(
     var isTimerRunning by remember { mutableStateOf(false) }
 
 
+
+    //launchedEffect with 2 keys
+
+    LaunchedEffect(key1 = currentTime, key2 = isTimerRunning, block ={
+
+        //loop to check if there is time remaing
+
+        if (currentTime>0 && isTimerRunning){
+
+            //delay coroutine
+            delay(100L)
+
+            //subtract 100L from the current time
+            currentTime -= 100L
+
+            //update the handle value
+            value = currentTime/totalTime.toFloat()
+        }
+
+    } )
     //Box to put everything
     Box(modifier = modifier.onSizeChanged {
         //whenever the size changes we get a new size in form of IntSize
