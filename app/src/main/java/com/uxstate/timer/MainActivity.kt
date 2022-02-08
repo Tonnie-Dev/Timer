@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -36,6 +38,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             TimerTheme {
 
+           // use surface to fill the background
+    Surface(modifier = Modifier.fillMaxSize(),color = Color(0xff101010)) {
+Timer(totalTime = 100, handleColor = Color.Green, activeBarColor = Color.Green, inactiveBarColor =Color.Gray )
+                }
             }
         }
     }
@@ -65,7 +71,7 @@ fun Timer(
 
 
 
-    //launchedEffect with 2 keys
+    //launchedEffect with 2 keys - if any key changes the block is rerun
 
     LaunchedEffect(key1 = currentTime, key2 = isTimerRunning, block ={
 
