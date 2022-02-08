@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -127,6 +129,40 @@ fun Timer(
             fontSize = 44.sp,
             fontWeight = FontWeight.Bold
         )
+
+        //Draw Button
+
+        Button(
+            onClick = {
+
+                      //timer needs a reset
+
+                      if (currentTime <=0L){
+currentTime = totalTime
+                          isTimerRunning = true
+                      }else{
+
+                          //negate
+                          isTimerRunning = !isTimerRunning
+                      }
+            },
+            modifier = Modifier.align(Alignment.BottomCenter),
+
+            //content color is the color of the enclosed texts
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor =
+                if (!isTimerRunning || currentTime <= 0) Color.Green else Color.Red
+            )
+        ) {
+
+            Text(
+                text = if (isTimerRunning && currentTime >= 0)
+                    "Stop"
+                else if (!isTimerRunning && currentTime > 0)
+                    "Start"
+                else "Restart"
+            )
+        }
     }
 
 
