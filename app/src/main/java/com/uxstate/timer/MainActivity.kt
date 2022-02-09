@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.sp
 import com.uxstate.timer.ui.theme.TimerTheme
 import kotlinx.coroutines.delay
 import java.lang.Math.PI
+import java.util.concurrent.TimeUnit
+
+
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -44,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     Box(contentAlignment = Alignment.Center) {
 
                         Timer(
-                            totalTime = 100L * 1000L,
+                            totalTime = 100 * 1000L,
 
                             handleColor = Color.Green,
                             activeBarColor = Color(0xFF37B900),
@@ -66,7 +69,7 @@ fun Timer(
     activeBarColor: Color,
     inactiveBarColor: Color,
     modifier: Modifier = Modifier,
-    initialValue: Float = 0f,
+    initialValue: Float = 1f,
     strokeWidth: Dp = 5.dp
 ) {
 
@@ -139,7 +142,7 @@ fun Timer(
 
             //center of the circle
             val center = Offset(size.width.toFloat() / 2, size.height.toFloat() / 2)
-            val beta = (250f * value + 145f) * (180 / PI).toFloat()
+            val beta = (250f * value + 145f) * ( PI/180).toFloat()
 
             val radius = size.width / 2f
 
@@ -151,7 +154,7 @@ fun Timer(
 //Draws a sequence of points according to the given PointMode.
             drawPoints(
                 points = listOf(Offset(center.x + a, center.y + b)),
-                pointMode = PointMode.Polygon,
+                pointMode = PointMode.Points,
                 color = handleColor,
                 strokeWidth = (strokeWidth * 3f).toPx(),
                 cap = StrokeCap.Round
