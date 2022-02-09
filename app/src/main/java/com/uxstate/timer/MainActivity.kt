@@ -93,10 +93,10 @@ fun Timer(
         if (currentTime > 0 && isTimerRunning) {
 
             //delay coroutine
-            delay(100L)
+            delay(1000L)
 
             //subtract 100L from the current time
-            currentTime -= 100L
+            currentTime -= 1000L
 
             //update the handle value
             value = currentTime / totalTime.toFloat()
